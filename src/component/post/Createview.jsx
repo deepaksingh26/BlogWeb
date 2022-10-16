@@ -1,10 +1,9 @@
 import { Box,Button,FormControl,InputBase,makeStyles, TextareaAutosize } from "@material-ui/core";
 import {AddCircle }from '@material-ui/icons';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { CreatePost } from "../../service/api";
 import {useNavigate} from 'react-router-dom';
-
-
+import axios from 'axios';
 const useStyle=makeStyles({
     container:
     {
@@ -39,11 +38,13 @@ const initialValue={
     title:"",
     description:"",
     picture:"",
-    username:'deepakthakur',
+    username:'',
     categories:"All",
     createdDate:new Date()
 }
+
 const Createview = () => {
+
     const navigate = useNavigate();
     const [post,setPost]=useState(initialValue);
     const classes=useStyle();
@@ -55,10 +56,23 @@ const Createview = () => {
         [e.target.name]:e.target.value
         })
     }
+    const x = localStorage.getItem('id');
     const savePost=async()=>{
     await CreatePost(post);
     navigate('/')
     }
+
+    useEffect(async()=>{
+        const x=localStorage.getItem('id');
+       const res=await axios.post("https://blog-app79.herokuapp.com/name",{id:x})
+       console.log('res',res);
+       let n=res.data.n;
+       setPost({
+           ...post,
+           ['username']:n
+       });
+       console.log('line 74 createpost',post);
+     },[]);
     return ( 
         <>
         <Box className={classes.container}>

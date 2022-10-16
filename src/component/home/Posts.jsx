@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import {getAllPosts} from '../../service/api.js';
 const Posts = () => {
     const [p,setP]=useState([]);
-    // console.log("console after useState");
    useEffect(async()=>{
        const data= await getAllPosts();
        console.log(data);

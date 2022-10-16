@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const Login = () => {
   let navigate = useNavigate();
   const [data,setData]=useState({
@@ -24,11 +25,12 @@ const Login = () => {
 const submitEve=async(e)=>
 {   
     e.preventDefault();
-    const res=await axios.post(`http://localhost:7000/getuser`,
+    const res=await axios.post(`https://blog-app79.herokuapp.com/getuser`,
     data
     );
-    localStorage.setItem("jwttoken", res.data);
-    console.log(res.data);
+     localStorage.setItem("jwttoken", res.data.token);
+    localStorage.setItem('id',res.data.id);
+    console.log(res.data.id);
   if(res.status===400||!res)
   {
     window.alert('Invalid credentials not get response');
@@ -36,7 +38,7 @@ const submitEve=async(e)=>
   else
   {
     window.alert('Login Sucessfull');
-    navigate('/');
+  navigate('/',);
   }
 }
     return (  

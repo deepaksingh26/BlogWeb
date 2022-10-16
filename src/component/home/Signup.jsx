@@ -26,7 +26,7 @@ const PostData=async(e)=>{
 e.preventDefault();
 const {fName,email,phone,pass,cpass}=data;
 console.log(data);
-const found =await axios.post("http://localhost:7000/register",{
+const found =await axios.post("https://blog-app79.herokuapp.com/register",{
   fName:fName,
   email:email,
   phone:phone,

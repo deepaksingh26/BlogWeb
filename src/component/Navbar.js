@@ -18,6 +18,7 @@ link:{
     color:'inherit'
 }
 })
+
 const Navbar = () => {
     const classes=useStyle();
     return( 
@@ -28,6 +29,10 @@ const Navbar = () => {
    <Typography>Contact</Typography>
    <Link className={classes.link} to='/login'><Typography>Log in</Typography></Link>
    <Link className={classes.link} to='/signin'><Typography>Sign up</Typography></Link>
+   <a href="#" onClick={()=>{
+   localStorage.clear();
+   window.location.href = '/';
+   }}>LOGOUT</a>
 </Toolbar>
 </AppBar>
         );
